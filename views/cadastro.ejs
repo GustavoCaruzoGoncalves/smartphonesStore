@@ -1,0 +1,54 @@
+<!-- views/cadastro.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/css/cadastrar.css">
+    <title>Cadastro/login</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form action="/cadastro" method="POST">
+                <h1>Crie sua conta!</h1>
+                <input type="text" name="nome" placeholder="Nome" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="senha" placeholder="Senha" required>
+                <button type="submit">Cadastre-se</button>
+            </form>
+        </div>
+        <div class="form-container sign-in">
+            <form action="/login" method="POST">
+                <h1>Entrar</h1>
+                <span>Use seu email e senha</span>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="senha" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>Bem vindo de volta!</h1>
+                    <p>Conecte usando seu email e senha!</p>
+                    <button class="hidden" id="login">Entrar</a>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Seja bem vindo!</h1>
+                    <p>Crie sua conta!</p>
+                    <button class="hidden" id="register">Cadastre-se</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/script.js"></script>
+</body>
+</html> 

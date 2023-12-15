@@ -1,0 +1,162 @@
+/* Estilos básicos para a barra de navegação */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    background-color: #000000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar ul li {
+    padding: 10px 20px;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+/* Estilos para os links quando passar o mouse por cima */
+.navbar ul li a:hover {
+    color: #f83e3e;
+}
+
+.logo img {
+    max-width: 100px; /* Ajuste o tamanho da logo conforme necessário */
+}
+
+.search input[type="text"],
+.search button {
+    padding: 8px;
+    font-size: 16px;
+    margin-right: 10px;
+     border-radius: 10px;
+}
+
+.search input[type="text"] {
+    width: 300px;
+}
+
+.search button {
+    background-color: #ff0202;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.search button:hover {
+    background-color: #d34646;
+}
+
+
+/* Estilos para os ícones */
+.icons a {
+    color: #fff;
+    margin-left: 10px; /* Espaçamento entre os ícones */
+    font-size: 18px;
+    text-decoration: none;
+}
+
+/* Espaçamento adicional para o segundo ícone */
+.icons a:nth-child(2) {
+    margin-left: 50px; /* Espaçamento entre o segundo ícone e o próximo elemento */
+}
+
+.icons a:hover {
+    color: #f83e3e;
+}
+
+/* Estilos para a seção de ações do usuário */
+.user-actions {
+    color: #fff;
+    margin-right: 10px;
+    font-size: 14px;
+    text-align: right;
+}
+
+.user-actions p {
+    margin: 0;
+}
+
+.btn-cadastro {
+    padding: 8px 16px;
+    background-color: #f83e3e;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.btn-cadastro:hover {
+    background-color: #ff4c4c;
+}
+/* Aqui é apenas para a nav bar */
+
+/*conteudo principal */
+
+/* Estilos anteriores */
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card-section {
+    margin-bottom: 30px;
+}
+
+.card-section h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: calc(50% - 20px);
+    margin: 10px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex: 1 1 40%; /* Distribui igualmente o espaço em telas maiores */
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.card p {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Coluna única para os "Mais vendidos" */
+@media screen and (max-width: 767px) {
+    .card-container {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "lojaiphone",
+  "version": "1.0.0",
+  "description": "Loja de Iphone",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GustavoCaruzoGoncalves/lojadeiphone.git"
+  },
+  "keywords": [
+    "loja",
+    "node",
+    "npm"
+  ],
+  "author": "GustavoCaruzo&PedroBachiega",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GustavoCaruzoGoncalves/lojadeiphone/issues"
+  },
+  "homepage": "https://github.com/GustavoCaruzoGoncalves/lojadeiphone#readme",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "mysql": "^2.18.1"
+  }
+}
