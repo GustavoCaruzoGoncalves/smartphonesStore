@@ -14,6 +14,10 @@
 </head>
 
 <body>
+    <!-- Adicione este bloco abaixo do formulário de cadastro -->
+    <% if (mensagemErro) { %>
+      <p style="color: red;"><%= mensagemErro %></p>
+    <% } %>
 
     <div class="container" id="container">
         <div class="form-container sign-up">
@@ -51,4 +55,4 @@
     </div>
     <script src="/js/script.js"></script>
 </body>
-</html> 
+</html>

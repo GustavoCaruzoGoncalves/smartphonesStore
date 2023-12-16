@@ -154,6 +154,55 @@ body {
     color: #666;
 }
 
+/* Adicione estilos para o dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: #f83e3e;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+    left: 0;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #f83e3e;
+    color: white;
+}
+
+/* Mostra o dropdown quando o mouse passa sobre o botão */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Estilos básicos para a barra de navegação */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
 /* Coluna única para os "Mais vendidos" */
 @media screen and (max-width: 767px) {
     .card-container {

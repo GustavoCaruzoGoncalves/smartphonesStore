@@ -16,19 +16,26 @@
     </div>
     <ul>
         <li><a href="/">Início</a></li>
-        <li><a href="/cadastre-se">Loja</a></li>
-        <li><a href="/cadastre-se">Entre em Contato</a></li>
+        <li><a href="/cadastro">Loja</a></li>
+        <li><a href="/cadastro">Entre em Contato</a></li>
     </ul>
     <div class="icons">
-        <a href="/cadastre-se"><i class="fas fa-shopping-cart"></i></a>
-        <a href="/cadastre-se"><i class="far fa-heart"></i></a>
+        <a href="/cadastro"><i class="fas fa-shopping-cart"></i></a>
+        <a href="/cadastro"><i class="far fa-heart"></i></a>
     </div>
 
     <div class="user-actions">
         <% if (nomeUsuario) { %>
-          <p>Bem-vindo, <%= nomeUsuario %>!</p>
+            <div class="dropdown">
+                <button class="dropbtn"><%= nomeUsuario %></button>
+                <div class="dropdown-content">
+                    <a href="#">Pedidos</a>
+                    <a href="#">Carrinho</a>
+                    <a href="/logout">Sair</a>
+                </div>
+            </div>
         <% } else { %>
-          <a href="/cadastro" class="btn-cadastro">Cadastre-se ou faça login</a>
+            <a href="/cadastro" class="btn-cadastro">Cadastrar-se ou faça login</a>
         <% } %>
     </div>
 
@@ -46,13 +53,13 @@
             <div class="card">
                 <img src="img/foto1.jpg" alt="iPhone 1">
                 <h3>Iphone 11 128GB</h3>
-                <a href="/cadastre-se">Ver mais</a>
+                <a href="/cadastro">Ver mais</a>
             </div>
             <!-- Card 2 -->
             <div class="card">
                 <img src="img/foto1.jpg" alt="iPhone 1">
                 <h3>Nome do iPhone 2</h3>
-                <a href="/cadastre-se">Ver mais</a>
+                <a href="/cadastro">Ver mais</a>
             </div>
             <!-- Adicione mais cards conforme necessário -->
         </div>
@@ -65,13 +72,13 @@
             <div class="card">
                 <img src="img/foto1.jpg" alt="iPhone 1">
                 <h3>Nome do produto 1</h3>
-                <a href="/cadastre-se">Ver mais</a>
+                <a href="/cadastro">Ver mais</a>
             </div>
             <!-- Card 2 -->
             <div class="card">
                 <img src="img/foto1.jpg" alt="iPhone 1">
                 <h3>Nome do produto 2</h3>
-                <a href="/cadastre-se">Ver mais</a>
+                <a href="/cadastro">Ver mais</a>
             </div>
             <!-- Adicione mais cards conforme necessário -->
         </div>
