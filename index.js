@@ -2,9 +2,22 @@
 
 const express = require('express');
 const session = require('express-session');
+const multer = require('multer');
 const db = require('./db/db');
 const app = express();
 const port = 3000;
+const path = require('path');
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/uploads'); // Especifique o diretório onde você deseja salvar as imagens
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({ storage: storage });
+
 
 // Configuração do mecanismo de template EJS
 app.set('view engine', 'ejs');
@@ -40,10 +53,26 @@ app.get('/usuarios', (req, res) => {
 
 // Adicione o roteamento para index.ejs
 app.get('/', (req, res) => {
-  // Recupera a variável nomeUsuario da sessão
   const nomeUsuario = req.session.nomeUsuario;
+  const tipo = req.session.tipo;
 
-  res.render('index', { nomeUsuario });  // Renderiza a página index.ejs
+  const sqlProdutos = 'SELECT * FROM produtos';
+  db.query(sqlProdutos, (err, resultados) => {
+    if (err) {
+      console.error('Erro ao buscar produtos:', err.stack);
+      res.status(500).send('Erro ao buscar produtos');
+      return;
+    }
+
+    const produtos = resultados.map(produto => {
+      return {
+        ...produto,
+        imagem: produto.imagem ? produto.imagem.toString('base64') : null, // Trata o caso da imagem nula
+      };
+    });
+
+    res.render('index', { nomeUsuario, produtos, tipo });
+  });
 });
 
 // Rota para exibir o formulário de login
@@ -69,8 +98,9 @@ app.post('/login', (req, res) => {
     }
 
     if (results.length > 0) {
-      // Usuário autenticado, armazena o nome do usuário na sessão
+      // Usuário autenticado, armazena o nome do usuário e tipo na sessão
       req.session.nomeUsuario = results[0].nome;
+      req.session.tipo = results[0].tipo; // Verifique se o nome da coluna está correto
       res.redirect('/');
     } else {
       // Credenciais inválidas, configura a mensagem de erro na sessão
@@ -88,14 +118,13 @@ app.get('/cadastro', (req, res) => {
 
 // Rota para processar o formulário de cadastro
 app.post('/cadastro', (req, res) => {
-  // Lógica para processar os dados do formulário de cadastro
   const nome = req.body.nome;
   const email = req.body.email;
   const senha = req.body.senha;
+  const tipo = req.body.tipo || 0;  // Padrão para usuário comum se não houver tipo no formulário
 
-  // Lógica de inserção no banco de dados
-  const sql = 'INSERT INTO usuarios (email, senha, nome) VALUES (?, ?, ?)';
-  db.query(sql, [email, senha, nome], (err, result) => {
+  const sql = 'INSERT INTO usuarios (email, senha, nome, tipo) VALUES (?, ?, ?, ?)';
+  db.query(sql, [email, senha, nome, tipo], (err, result) => {
     if (err) {
       console.error('Erro ao cadastrar usuário:', err.stack);
       req.session.mensagemErro = 'Erro ao cadastrar usuário. Por favor, tente novamente.';
@@ -108,6 +137,49 @@ app.post('/cadastro', (req, res) => {
 
     // Redireciona para o index.ejs com o nome do usuário
     res.redirect('/');  // Redireciona para a rota '/' após o cadastro
+  });
+});
+
+app.get('/produtos', (req, res) => {
+  // Verifique se o usuário é um administrador
+  if (req.session.tipo === 1) {
+    res.render('produtos');
+  } else {
+    res.status(403).send('Acesso negado.');
+  }
+});
+
+app.get('/admin', (req, res) => {
+  // Verifique se o usuário é um administrador
+  if (req.session.tipo === 1) {
+    res.render('admin');
+  } else {
+    res.status(403).send('Acesso negado.');
+  }
+});
+
+app.post('/admin/adicionar-produto', upload.single('imagem'), (req, res) => {
+  const nome = req.body.nome;
+  const descricao = req.body.descricao;
+  const preco = req.body.preco;
+  const imagem = req.file;
+
+  if (!imagem) {
+    res.status(400).send('É necessário enviar uma imagem.');
+    return;
+  }
+
+  const caminhoImagem = '/uploads/' + imagem.filename; // Caminho relativo ao diretório public
+
+  const sql = 'INSERT INTO produtos (nome, descricao, preco, imagem) VALUES (?, ?, ?, ?)';
+  db.query(sql, [nome, descricao, preco, caminhoImagem], (err, result) => {
+    if (err) {
+      console.error('Erro ao adicionar produto:', err.stack);
+      res.status(500).send('Erro ao adicionar produto');
+      return;
+    }
+
+    res.redirect('/admin');
   });
 });
 

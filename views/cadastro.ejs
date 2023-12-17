@@ -16,43 +16,51 @@
 <body>
     <!-- Adicione este bloco abaixo do formulário de cadastro -->
     <% if (mensagemErro) { %>
-      <p style="color: red;"><%= mensagemErro %></p>
-    <% } %>
+        <p style="color: red;">
+            <%= mensagemErro %>
+        </p>
+        <% } %>
 
-    <div class="container" id="container">
-        <div class="form-container sign-up">
-            <form action="/cadastro" method="POST">
-                <h1>Crie sua conta!</h1>
-                <input type="text" name="nome" placeholder="Nome" required>
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="password" name="senha" placeholder="Senha" required>
-                <button type="submit">Cadastre-se</button>
-            </form>
-        </div>
-        <div class="form-container sign-in">
-            <form action="/login" method="POST">
-                <h1>Entrar</h1>
-                <span>Use seu email e senha</span>
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="password" name="senha" placeholder="Senha" required>
-                <button type="submit">Entrar</button>
-            </form>
-        </div>
-        <div class="toggle-container">
-            <div class="toggle">
-                <div class="toggle-panel toggle-left">
-                    <h1>Bem vindo de volta!</h1>
-                    <p>Conecte usando seu email e senha!</p>
-                    <button class="hidden" id="login">Entrar</a>
+            <div class="container" id="container">
+                <div class="form-container sign-up">
+                    <form action="/cadastro" method="POST">
+                        <h1>Crie sua conta!</h1>
+                        <input type="text" name="nome" placeholder="Nome" required>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <input type="password" name="senha" placeholder="Senha" required>
+                        <label for="tipo">Tipo de Usuário:</label>
+                        <select id="tipo" name="tipo">
+                            <option value="0">Usuário Comum</option>
+                            <option value="1">Administrador</option>
+                        </select>
+                        <button type="submit">Cadastre-se</button>
+                    </form>
                 </div>
-                <div class="toggle-panel toggle-right">
-                    <h1>Seja bem vindo!</h1>
-                    <p>Crie sua conta!</p>
-                    <button class="hidden" id="register">Cadastre-se</a>
+                <div class="form-container sign-in">
+                    <form action="/login" method="POST">
+                        <h1>Entrar</h1>
+                        <span>Use seu email e senha</span>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <input type="password" name="senha" placeholder="Senha" required>
+                        <button type="submit">Entrar</button>
+                    </form>
+                </div>
+                <div class="toggle-container">
+                    <div class="toggle">
+                        <div class="toggle-panel toggle-left">
+                            <h1>Bem vindo de volta!</h1>
+                            <p>Conecte usando seu email e senha!</p>
+                            <button class="hidden" id="login">Entrar</a>
+                        </div>
+                        <div class="toggle-panel toggle-right">
+                            <h1>Seja bem vindo!</h1>
+                            <p>Crie sua conta!</p>
+                            <button class="hidden" id="register">Cadastre-se</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <script src="/js/script.js"></script>
+            <script src="/js/script.js"></script>
 </body>
+
 </html>

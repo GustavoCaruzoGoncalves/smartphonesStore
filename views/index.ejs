@@ -1,6 +1,7 @@
 <!-- views/index.ejs -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,82 +9,77 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
+
 <body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="img/logoloja.jpg" alt="Logo da Loja">
+        </div>
+        <ul>
+            <li><a href="/">Início</a></li>
+            <li><a href="/cadastro">Loja</a></li>
+            <li><a href="/cadastro">Entre em Contato</a></li>
+        </ul>
+        <div class="icons">
+            <a href="/cadastro"><i class="fas fa-shopping-cart"></i></a>
+            <a href="/cadastro"><i class="far fa-heart"></i></a>
+        </div>
 
-<nav class="navbar">
-    <div class="logo">
-        <img src="img/logoloja.jpg" alt="Logo da Loja">
-    </div>
-    <ul>
-        <li><a href="/">Início</a></li>
-        <li><a href="/cadastro">Loja</a></li>
-        <li><a href="/cadastro">Entre em Contato</a></li>
-    </ul>
-    <div class="icons">
-        <a href="/cadastro"><i class="fas fa-shopping-cart"></i></a>
-        <a href="/cadastro"><i class="far fa-heart"></i></a>
-    </div>
-
-    <div class="user-actions">
-        <% if (nomeUsuario) { %>
+ <div class="user-actions">
+    <% if (nomeUsuario) { %>
+        <!-- Verifique se o usuário é um administrador -->
+        <% if (tipo === 1) { %>
+            <!-- Se for um administrador, exiba opções específicas -->
             <div class="dropdown">
-                <button class="dropbtn"><%= nomeUsuario %></button>
+                <button class="dropbtn">Bem-vindo, <%= nomeUsuario %>!</button>
                 <div class="dropdown-content">
-                    <a href="#">Pedidos</a>
-                    <a href="#">Carrinho</a>
+                    <a href="/produtos">Produtos Cadastrados</a>
+                    <a href="/admin">Página de Administrador</a>
                     <a href="/logout">Sair</a>
                 </div>
             </div>
         <% } else { %>
-            <a href="/cadastro" class="btn-cadastro">Cadastrar-se ou faça login</a>
+            <!-- Se for um usuário comum, exiba opções padrão -->
+            <div class="dropdown">
+                <button class="dropbtn">Bem-vindo, <%= nomeUsuario %>!</button>
+                <div class="dropdown-content">
+                    <a href="/carrinho">Carrinho</a>
+                    <a href="/loja">Loja</a>
+                    <a href="/logout">Sair</a>
+                </div>
+            </div>
         <% } %>
-    </div>
-
-    <div class="search">
-        <input type="text" placeholder="Pesquisar">
-        <button type="submit">Buscar</button>
-    </div>
-</nav>
-
-<div class="container">
-    <div class="card-section">
-        <h2>Produtos mais procurados</h2>
-        <div class="card-container">
-            <!-- Card 1 -->
-            <div class="card">
-                <img src="img/foto1.jpg" alt="iPhone 1">
-                <h3>Iphone 11 128GB</h3>
-                <a href="/cadastro">Ver mais</a>
-            </div>
-            <!-- Card 2 -->
-            <div class="card">
-                <img src="img/foto1.jpg" alt="iPhone 1">
-                <h3>Nome do iPhone 2</h3>
-                <a href="/cadastro">Ver mais</a>
-            </div>
-            <!-- Adicione mais cards conforme necessário -->
-        </div>
-    </div>
-
-    <div class="card-section">
-        <h2>Mais vendidos</h2>
-        <div class="card-container">
-            <!-- Card 1 -->
-            <div class="card">
-                <img src="img/foto1.jpg" alt="iPhone 1">
-                <h3>Nome do produto 1</h3>
-                <a href="/cadastro">Ver mais</a>
-            </div>
-            <!-- Card 2 -->
-            <div class="card">
-                <img src="img/foto1.jpg" alt="iPhone 1">
-                <h3>Nome do produto 2</h3>
-                <a href="/cadastro">Ver mais</a>
-            </div>
-            <!-- Adicione mais cards conforme necessário -->
-        </div>
-    </div>
+    <% } else { %>
+        <a href="/cadastro" class="btn-cadastro">Cadastre-se ou faça login</a>
+    <% } %>
 </div>
 
+        <div class="search">
+            <input type="text" placeholder="Pesquisar">
+            <button type="submit">Buscar</button>
+        </div>
+    </nav>
+
+<!-- views/index.ejs -->
+<!-- ... (código anterior) ... -->
+
+<div class="card-container">
+    <% produtos.forEach(produto => { %>
+        <div class="card">
+            <% if (produto) { %>
+                <img src="<%= produto.imagem ? produto.imagem : '/uploads/placeholder.jpg' %>" alt="<%= produto.nome %>">         
+                <h3><%= produto.nome %></h3>
+                <p><%= produto.descricao %></p>
+                <p>Preço: R$ <%= produto.preco.toFixed(2) %></p>
+            <% } %>
+        </div>
+    <% }); %>                
+</div>
+
+
+<!-- ... (código posterior) ... -->
+
+
 </body>
+
 </html>

@@ -154,7 +154,6 @@ body {
     color: #666;
 }
 
-/* Adicione estilos para o dropdown */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -176,7 +175,6 @@ body {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
     border-radius: 5px;
-    left: 0;
 }
 
 .dropdown-content a {
@@ -201,6 +199,13 @@ body {
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+}
+
+.card img {
+    width: 400px; /* Ajusta a largura da imagem para 100% do seu contêiner */
+    height: 400px; /* Define uma altura fixa para todas as imagens */
+    object-fit: cover; /* Garante que a imagem cubra completamente a área designada, mantendo a proporção */
+    margin-bottom: 10px;
 }
 
 /* Coluna única para os "Mais vendidos" */
