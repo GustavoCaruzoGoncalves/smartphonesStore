@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do administrador</title>
+    <link rel="stylesheet" href="/css/paineladmin.css">
+</head>
+
+<body>
+    <!-- Lista de produtos -->
+
+    <a href="/admin" class="btn-container">
+        <button class="btn-adicionar">Adicionar Novo Produto</button>
+    </a>
+
+    <ul>
+        <% produtos.forEach((produto)=> { %>
+            <p>Nome: <%= produto.nome %>
+            </p>
+            <p>Descrição: <%= produto.descricao %>
+            </p>
+            <p>Preço: <%= produto.preco %>
+            </p>
+            <img src="<%= produto.imagem ? produto.imagem : '/uploads/placeholder.jpg' %>" alt="<%= produto.nome %>">
+            <p>
+                <!-- Botão para excluir produto -->
+            <form action="/admin/excluir-produto" method="POST" style="display: inline;">
+                <input type="hidden" name="produtoId" value="<%= produto.id %>">
+                <button type="submit" class="btn-excluir">Excluir</button>
+            </form>
+            </p>
+            <% }); %>
+    </ul>
+</body>
+
+</html>

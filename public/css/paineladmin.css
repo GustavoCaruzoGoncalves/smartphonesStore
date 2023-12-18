@@ -1,0 +1,47 @@
+/* Adicione essas regras ao seu CSS para estilizar os botões */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+}
+
+.btn-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.btn-adicionar {
+    background-color: #4CAF50; /* Cor verde para o botão de adicionar */
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-excluir {
+    background-color: #f83e3e; /* Cor vermelha para o botão de excluir */
+    color: #fff;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+.btn-adicionar:hover, .btn-excluir:hover {
+    opacity: 0.8; /* Adiciona um efeito de opacidade ao passar o mouse sobre os botões */
+}
+
+/* Estilizar as imagens */
+ul img {
+    width: 100%; /* Torna a imagem responsiva */
+    height: 200px; /* Ajuste a altura conforme necessário */
+    object-fit: cover; /* Garante que a imagem cubra completamente a área designada, mantendo a proporção */
+    margin-bottom: 10px;
+}

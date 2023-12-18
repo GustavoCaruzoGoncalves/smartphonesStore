@@ -10,6 +10,10 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
+    width: 100%; /* Adicione esta linha para ocupar 100% da largura da tela */
+    position: fixed; /* Adicione esta linha para fixar a barra no topo da página */
+    top: 0; /* Adicione esta linha para posicionar a barra no topo da página */
+    z-index: 1000; /* Adicione esta linha para garantir que a barra esteja acima de outros elementos */
 }
 
 .navbar ul {
@@ -17,6 +21,7 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
+    flex-wrap: wrap; /* Permite que os itens da lista se movam para a próxima linha em telas menores */
 }
 
 .navbar ul li {
@@ -42,7 +47,7 @@ body {
     padding: 8px;
     font-size: 16px;
     margin-right: 10px;
-     border-radius: 10px;
+    border-radius: 10px;
 }
 
 .search input[type="text"] {
@@ -55,12 +60,14 @@ body {
     border: none;
     cursor: pointer;
     border-radius: 10px;
+    padding: 12px 20px; /* Ajusta o preenchimento interno do botão */
+    font-size: 16px; /* Ajusta o tamanho da fonte do texto do botão */
+    transition: background-color 0.3s ease; /* Adiciona uma transição suave para a mudança de cor de fundo */
 }
 
 .search button:hover {
     background-color: #d34646;
 }
-
 
 /* Estilos para os ícones */
 .icons a {
@@ -92,23 +99,20 @@ body {
 }
 
 .btn-cadastro {
-    padding: 8px 16px;
+    padding: 8px;
     background-color: #f83e3e;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
     margin-left: 10px;
+    display: inline-block; /* Adiciona a propriedade display: inline-block; */
 }
 
 .btn-cadastro:hover {
     background-color: #ff4c4c;
 }
-/* Aqui é apenas para a nav bar */
 
 /*conteudo principal */
-
-/* Estilos anteriores */
-
 .container {
     max-width: 500px;
     margin: 0 auto;
@@ -132,26 +136,29 @@ body {
 .card {
     width: calc(50% - 20px);
     margin: 10px;
-    padding: 15px;
+    padding: 10px;
     background-color: #f9f9f9;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     flex: 1 1 40%; /* Distribui igualmente o espaço em telas maiores */
 }
 
 .card img {
-    width: 100%;
-    height: auto;
+    width: 10%; /* Torna a imagem responsiva */
+    height: 100%; /* Altura fixa para manter o mesmo tamanho */
     margin-bottom: 10px;
-}
-
-.card h3 {
-    font-size: 18px;
-    margin-bottom: 5px;
+    object-fit: cover; /* Garante que a imagem cubra completamente a área designada, mantendo a proporção */
 }
 
 .card p {
     font-size: 14px;
     color: #666;
+    max-height: 60px; /* Limita o número de linhas para manter a consistência */
+    overflow: hidden;
+}
+
+.card h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
 }
 
 .dropdown {
@@ -195,22 +202,24 @@ body {
     display: block;
 }
 
-/* Estilos básicos para a barra de navegação */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
-
-.card img {
-    width: 400px; /* Ajusta a largura da imagem para 100% do seu contêiner */
-    height: 400px; /* Define uma altura fixa para todas as imagens */
-    object-fit: cover; /* Garante que a imagem cubra completamente a área designada, mantendo a proporção */
-    margin-bottom: 10px;
-}
-
 /* Coluna única para os "Mais vendidos" */
 @media screen and (max-width: 767px) {
-    .card-container {
-        flex-direction: column;
+    .navbar ul {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .navbar ul li {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .icons a:nth-child(2) {
+        margin-left: 0; /* Redefina o espaçamento entre o segundo ícone e o próximo elemento */
+    }
+
+    .btn-cadastro {
+        margin-left: 0; /* Remove a margem à esquerda para evitar que o botão quebre */
     }
 }

@@ -149,8 +149,31 @@ app.get('/produtos', (req, res) => {
   }
 });
 
-app.get('/admin', (req, res) => {
+app.get('/paineladmin', (req, res) => {
   // Verifique se o usuário é um administrador
+  const sqlProdutos = 'SELECT * FROM produtos';
+  db.query(sqlProdutos, (err, resultados) => {
+    if (err) {
+      console.error('Erro ao buscar produtos:', err.stack);
+      res.status(500).send('Erro ao buscar produtos');
+      return;
+    }
+
+    const produtos = resultados.map(produto => {
+      return {
+        ...produto,
+        imagem: produto.imagem ? produto.imagem.toString('base64') : null, // Trata o caso da imagem nula
+      };
+    });
+  
+  if (req.session.tipo === 1) {
+    res.render('paineladmin', { produtos });
+  } else {
+    res.status(403).send('Acesso negado.');
+  }
+})});
+
+app.get('/admin', (req, res) => {
   if (req.session.tipo === 1) {
     res.render('admin');
   } else {
@@ -179,7 +202,7 @@ app.post('/admin/adicionar-produto', upload.single('imagem'), (req, res) => {
       return;
     }
 
-    res.redirect('/admin');
+    res.redirect('/paineladmin');
   });
 });
 
@@ -188,6 +211,22 @@ app.get('/logout', (req, res) => {
   // Limpa a variável nomeUsuario da sessão
   req.session.nomeUsuario = null;
   res.redirect('/');
+});
+
+app.post('/admin/excluir-produto', (req, res) => {
+  const produtoId = req.body.produtoId;
+
+  // Lógica para excluir o produto com o ID fornecido
+  const sql = 'DELETE FROM produtos WHERE id = ?';
+  db.query(sql, [produtoId], (err, result) => {
+    if (err) {
+      console.error('Erro ao excluir produto:', err.stack);
+      res.status(500).send('Erro ao excluir produto');
+      return;
+    }
+
+    res.redirect('/paineladmin');
+  });
 });
 
 app.listen(port, () => {
