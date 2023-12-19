@@ -108,7 +108,21 @@ body {
     display: inline-block; /* Adiciona a propriedade display: inline-block; */
 }
 
+.btn-themetoggle {
+    padding: 8px;
+    background-color: #f83e3e;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-left: 10px;
+    display: inline-block; /* Adiciona a propriedade display: inline-block; */
+}
+
 .btn-cadastro:hover {
+    background-color: #ff4c4c;
+}
+
+.btn-themetoggle:hover {
     background-color: #ff4c4c;
 }
 
@@ -140,13 +154,14 @@ body {
     background-color: #f9f9f9;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     flex: 1 1 40%; /* Distribui igualmente o espaço em telas maiores */
+    box-sizing: border-box; /* Adiciona a propriedade para garantir que padding e border não alterem o tamanho total */
 }
 
 .card img {
-    width: 10%; /* Torna a imagem responsiva */
-    height: 100%; /* Altura fixa para manter o mesmo tamanho */
-    margin-bottom: 10px;
-    object-fit: cover; /* Garante que a imagem cubra completamente a área designada, mantendo a proporção */
+    max-width: 200px;
+    max-width: 200px;
+    object-fit: contain;
+    margin-top: 100px;
 }
 
 .card p {
@@ -222,4 +237,16 @@ body {
     .btn-cadastro {
         margin-left: 0; /* Remove a margem à esquerda para evitar que o botão quebre */
     }
+}
+
+.dark-theme {
+    background-color: #1a1a1a; /* Cor de fundo do tema escuro */
+    color: #ffffff; /* Cor do texto no tema escuro */
+
+    .card {
+        background-color: #2c2c2c; /* Cor de fundo dos cards no tema escuro */
+        color: #ffffff; /* Cor do texto nos cards no tema escuro */
+    }
+
+    /* Adicione mais estilos conforme necessário para outros elementos */
 }

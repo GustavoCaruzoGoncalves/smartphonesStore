@@ -25,61 +25,70 @@
             <a href="/cadastro"><i class="far fa-heart"></i></a>
         </div>
 
- <div class="user-actions">
-    <% if (nomeUsuario) { %>
-        <!-- Verifique se o usuário é um administrador -->
-        <% if (tipo === 1) { %>
-            <!-- Se for um administrador, exiba opções específicas -->
-            <div class="dropdown">
-                <button class="dropbtn">Bem-vindo, <%= nomeUsuario %>!</button>
-                <div class="dropdown-content">
-                    <a href="/produtos">Produtos Cadastrados</a>
-                    <a href="/paineladmin">Página de Administrador</a>
-                    <a href="/logout">Sair</a>
-                </div>
-            </div>
-        <% } else { %>
-            <!-- Se for um usuário comum, exiba opções padrão -->
-            <div class="dropdown">
-                <button class="dropbtn">Bem-vindo, <%= nomeUsuario %>!</button>
-                <div class="dropdown-content">
-                    <a href="/carrinho">Carrinho</a>
-                    <a href="/loja">Loja</a>
-                    <a href="/logout">Sair</a>
-                </div>
-            </div>
-        <% } %>
-    <% } else { %>
-        <a href="/cadastro" class="btn-cadastro">Cadastre-se ou faça login</a>
-    <% } %>
-</div>
+        <div class="user-actions">
+            <% if (nomeUsuario) { %>
+                <!-- Verifique se o usuário é um administrador -->
+                <% if (tipo===1) { %>
+                    <!-- Se for um administrador, exiba opções específicas -->
+                    <div class="dropdown">
+                        <button class="dropbtn">Bem-vindo, <%= nomeUsuario %>!</button>
+                        <div class="dropdown-content">
+                            <a href="/produtos">Produtos Cadastrados</a>
+                            <a href="/paineladmin">Página de Administrador</a>
+                            <a href="/logout">Sair</a>
+                        </div>
+                    </div>
+                    <% } else { %>
+                        <!-- Se for um usuário comum, exiba opções padrão -->
+                        <div class="dropdown">
+                            <button class="dropbtn">Bem-vindo, <%= nomeUsuario %>!</button>
+                            <div class="dropdown-content">
+                                <a href="/carrinho">Carrinho</a>
+                                <a href="/loja">Loja</a>
+                                <a href="/logout">Sair</a>
+                            </div>
+                        </div>
+                        <% } %>
+                            <% } else { %>
+                                <a href="/cadastro" class="btn-cadastro">Cadastre-se ou faça login</a>
+                                <% } %>
+        </div>
+
+        <div class="theme-switch">
+            <a href="#" id="theme-toggle" onclick="toggleTheme()" class="btn-themetoggle">Mudar tema</a>
+        </div>
 
         <div class="search">
-            <input type="text" placeholder="Pesquisar">
-            <button type="submit">Buscar</button>
+            <form action="/pesquisar" method="GET">
+                <!-- Alteração: Adiciona o formulário e define a rota de pesquisa -->
+                <input type="text" placeholder="Pesquisar" name="q"> <!-- Alteração: Adiciona o atributo 'name' -->
+                <button type="submit">Buscar</button>
+            </form>
         </div>
     </nav>
 
-<!-- views/index.ejs -->
-<!-- ... (código anterior) ... -->
+    <!-- views/index.ejs -->
+    <!-- ... (código anterior) ... -->
 
-<div class="card-container">
-    <% produtos.forEach(produto => { %>
-        <div class="card">
-            <% if (produto) { %>
-                <img src="<%= produto.imagem ? produto.imagem : '/uploads/placeholder.jpg' %>" alt="<%= produto.nome %>">         
-                <h3><%= produto.nome %></h3>
-                <p><%= produto.descricao %></p>
-                <p>Preço: R$ <%= produto.preco.toFixed(2) %></p>
-            <% } %>
-        </div>
-    <% }); %>                
-</div>
-
-
-<!-- ... (código posterior) ... -->
-
-
+    <div class="card-container">
+        <% produtos.forEach(produto=> { %>
+            <div class="card">
+                <% if (produto) { %>
+                    <img src="<%= produto.imagem ? produto.imagem : '/uploads/placeholder.jpg' %>"
+                        alt="<%= produto.nome %>">
+                    <h3>
+                        <%= produto.nome %>
+                    </h3>
+                    <p>
+                        <%= produto.descricao %>
+                    </p>
+                    <p>Preço: R$ <%= produto.preco.toFixed(2) %>
+                    </p>
+                    <% } %>
+            </div>
+            <% }); %>
+    </div>
+    <script src="/js/home.js"></script>
 </body>
 
 </html>

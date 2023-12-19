@@ -229,6 +229,93 @@ app.post('/admin/excluir-produto', (req, res) => {
   });
 });
 
+// Rota para exibir o formulário de edição de produto
+app.get('/admin/editar-produto/:id', (req, res) => {
+  const produtoId = req.params.id;
+
+  // Lógica para buscar as informações do produto pelo ID
+  const sql = 'SELECT * FROM produtos WHERE id = ?';
+  db.query(sql, [produtoId], (err, results) => {
+    if (err) {
+      console.error('Erro ao buscar informações do produto:', err.stack);
+      res.status(500).send('Erro ao buscar informações do produto');
+      return;
+    }
+
+    if (results.length === 0) {
+      // Produto não encontrado
+      res.status(404).send('Produto não encontrado');
+      return;
+    }
+
+    const produto = results[0];
+
+    // Renderiza a página de edição de produto com as informações do produto
+    res.render('editar-produto', { produto });
+  });
+});
+
+// Rota para processar o formulário de edição de produto
+app.post('/admin/editar-produto/:id', upload.single('imagem'), (req, res) => {
+  const produtoId = req.params.id;
+  const nome = req.body.nome;
+  const descricao = req.body.descricao;
+  const preco = req.body.preco;
+  const imagem = req.file;
+
+  // Lógica para atualizar as informações do produto no banco de dados
+  let sql;
+  let params;
+
+  if (imagem) {
+    const caminhoImagem = '/uploads/' + imagem.filename;
+    sql = 'UPDATE produtos SET nome = ?, descricao = ?, preco = ?, imagem = ? WHERE id = ?';
+    params = [nome, descricao, preco, caminhoImagem, produtoId];
+  } else {
+    sql = 'UPDATE produtos SET nome = ?, descricao = ?, preco = ? WHERE id = ?';
+    params = [nome, descricao, preco, produtoId];
+  }
+
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      console.error('Erro ao editar produto:', err.stack);
+      res.status(500).send('Erro ao editar produto');
+      return;
+    }
+
+    res.redirect('/paineladmin');
+  });
+});
+
+app.get('/pesquisar', (req, res) => {
+  const query = req.query.q || ''; // Obtém a consulta da URL
+
+  // Lógica para buscar produtos que correspondem à consulta
+  const sql = 'SELECT * FROM produtos WHERE nome LIKE ? OR descricao LIKE ?';
+  const params = [`%${query}%`, `%${query}%`];
+
+  db.query(sql, params, (err, resultados) => {
+    if (err) {
+      console.error('Erro ao executar a consulta de pesquisa:', err.stack);
+      res.status(500).send('Erro ao buscar produtos');
+      return;
+    }
+
+    const produtos = resultados.map(produto => {
+      return {
+        ...produto,
+        imagem: produto.imagem ? produto.imagem.toString('base64') : null,
+      };
+    });
+
+    const nomeUsuario = req.session.nomeUsuario || '';
+    const tipo = req.session.tipo || 0;
+
+    // Renderiza a página EJS com os resultados da pesquisa
+    res.render('pesquisar', { nomeUsuario, produtos, tipo, query });
+  });
+});
+
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
 });

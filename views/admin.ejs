@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionar produto</title>
+    <title>Adicionar Produto</title>
     <link rel="stylesheet" href="/css/admin.css">
 </head>
 
 <body>
-    <h1>Painel de Administração</h1>
-    <form action="/admin/adicionar-produto" method="POST" enctype="multipart/form-data">
+    <h1>Painel de Administração - Adicionar Produto</h1>
+
+    <form id="adicionarProdutoForm" action="/admin/adicionar-produto" method="POST" enctype="multipart/form-data">
         <label for="nome">Nome do Produto:</label>
         <input type="text" id="nome" name="nome" required>
 
@@ -22,9 +23,12 @@
 
         <label for="imagem">Imagem:</label>
         <input type="file" id="imagem" name="imagem" required>
+        <img id="imagemPreview" src="#" alt="Preview da Imagem"
+            style="display:none; max-width: 200px; margin-top: 10px;">
 
         <button type="submit">Adicionar Produto</button>
     </form>
+    <script src="/js/admin.js"></script>
 </body>
 
 </html>

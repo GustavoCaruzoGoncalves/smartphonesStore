@@ -1,4 +1,3 @@
-/* Adicione essas regras ao seu CSS para estilizar os botões */
 body {
     display: flex;
     justify-content: center;
@@ -14,7 +13,7 @@ body {
 }
 
 .btn-adicionar {
-    background-color: #4CAF50; /* Cor verde para o botão de adicionar */
+    background-color: #4CAF50;
     color: #fff;
     padding: 10px;
     border: none;
@@ -23,8 +22,8 @@ body {
     font-size: 14px;
 }
 
-.btn-excluir {
-    background-color: #f83e3e; /* Cor vermelha para o botão de excluir */
+.btn-editar {
+    background-color: blue;
     color: #fff;
     padding: 8px;
     border: none;
@@ -34,14 +33,44 @@ body {
     margin-left: 5px;
 }
 
-.btn-adicionar:hover, .btn-excluir:hover {
-    opacity: 0.8; /* Adiciona um efeito de opacidade ao passar o mouse sobre os botões */
+.btn-excluir {
+    background-color: #f83e3e;
+    color: #fff;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: 5px;
 }
 
-/* Estilizar as imagens */
-ul img {
-    width: 100%; /* Torna a imagem responsiva */
-    height: 200px; /* Ajuste a altura conforme necessário */
-    object-fit: cover; /* Garante que a imagem cubra completamente a área designada, mantendo a proporção */
-    margin-bottom: 10px;
+.btn-adicionar:hover,
+.btn-excluir:hover,
+.btn-editar:hover {
+    opacity: 0.8;
+}
+
+/* Estilizar as imagens e textos */
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0;
+    list-style: none;
+}
+
+li {
+    text-align: center;
+    margin: 10px;
+}
+
+img {
+    max-width: 200px;
+    max-height: 200px;
+    object-fit: contain;
+    margin-bottom: 10px; /* Adiciona espaço entre a imagem e o texto */
+}
+
+p {
+    margin: 0; /* Remove margens padrão do parágrafo */
 }

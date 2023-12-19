@@ -1,0 +1,78 @@
+<!-- views/pesquisar.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RodriguesPhone - Resultados da Pesquisa</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="img/logoloja.jpg" alt="Logo da Loja">
+        </div>
+        <ul>
+            <li><a href="/">Início</a></li>
+            <li><a href="/cadastro">Loja</a></li>
+            <li><a href="/cadastro">Entre em Contato</a></li>
+        </ul>
+        <div class="icons">
+            <a href="/cadastro"><i class="fas fa-shopping-cart"></i></a>
+            <a href="/cadastro"><i class="far fa-heart"></i></a>
+        </div>
+
+        <div class="user-actions">
+            <% if (nomeUsuario) { %>
+                <% if (tipo === 1) { %>
+                    <div class="dropdown">
+                        <button class="dropbtn">Bem-vindo, <%= nomeUsuario %>!</button>
+                        <div class="dropdown-content">
+                            <a href="/produtos">Produtos Cadastrados</a>
+                            <a href="/paineladmin">Página de Administrador</a>
+                            <a href="/logout">Sair</a>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <div class="dropdown">
+                        <button class="dropbtn">Bem-vindo, <%= nomeUsuario %>!</button>
+                        <div class="dropdown-content">
+                            <a href="/carrinho">Carrinho</a>
+                            <a href="/loja">Loja</a>
+                            <a href="/logout">Sair</a>
+                        </div>
+                    </div>
+                <% } %>
+            <% } else { %>
+                <a href="/cadastro" class="btn-cadastro">Cadastre-se ou faça login</a>
+            <% } %>
+        </div>
+
+        <div class="search">
+            <form action="/pesquisar" method="GET">
+                <input type="text" placeholder="Pesquisar" name="q" value="<%= query %>">
+                <button type="submit">Buscar</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="result-container">
+        <% produtos.forEach(produto => { %>
+            <div class="card">
+                <% if (produto) { %>
+                    <img src="<%= produto.imagem ? produto.imagem : '/uploads/placeholder.jpg' %>"
+                        alt="<%= produto.nome %>">
+                    <h3><%= produto.nome %></h3>
+                    <p><%= produto.descricao %></p>
+                    <p>Preço: R$ <%= produto.preco.toFixed(2) %></p>
+                <% } %>
+            </div>
+        <% }); %>
+    </div>
+
+</body>
+
+</html>

@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 -- Banco de dados: `bd_loja`
 --
 
+CREATE DATABASE bd_loja;
+
 USE bd_loja;
 
 -- --------------------------------------------------------

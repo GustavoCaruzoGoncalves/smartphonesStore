@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Produto</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+    <h1>Painel de Administração - Editar Produto</h1>
+
+    <form action="/admin/editar-produto/<%= produto.id %>" method="POST" enctype="multipart/form-data">
+        <label for="nome">Nome do Produto:</label>
+        <input type="text" id="nome" name="nome" value="<%= produto.nome %>" required>
+
+        <label for="descricao">Descrição:</label>
+        <textarea id="descricao" name="descricao" required><%= produto.descricao %></textarea>
+
+        <label for="preco">Preço:</label>
+        <input type="text" id="preco" name="preco" value="<%= produto.preco %>" required>
+
+        <label for="imagem">Imagem:</label>
+        <input type="file" id="imagem" name="imagem">
+        <img src="<%= produto.imagem ? produto.imagem : '/uploads/placeholder.jpg' %>" alt="<%= produto.nome %>"
+            width="100">
+        <p>Preview da nova imagem: </p>
+        <img id="imagemPreview" src="#" alt="Preview da Imagem"
+            style="display:none; max-width: 200px; margin-top: 10px;">
+
+        <button type="submit">Atualizar Produto</button>
+    </form>
+    <script src="/js/admin.js"></script>
+</body>
+
+</html>
