@@ -5,7 +5,7 @@ const session = require('express-session');
 const multer = require('multer');
 const db = require('./db/db');
 const app = express();
-const port = 3000;
+const port = 3005;
 const path = require('path');
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -140,6 +140,8 @@ app.post('/cadastro', (req, res) => {
   });
 });
 
+
+
 app.get('/produtos', (req, res) => {
   // Verifique se o usuário é um administrador
   if (req.session.tipo === 1) {
@@ -180,6 +182,16 @@ app.get('/admin', (req, res) => {
     res.status(403).send('Acesso negado.');
   }
 });
+
+app.get('/loja', (req, res) => {
+  res.render('loja'); 
+});
+
+app.get('/contato', (req, res) => {
+  res.render('contato'); // Renderiza a página 'contato.ejs'
+});
+
+
 
 app.post('/admin/adicionar-produto', upload.single('imagem'), (req, res) => {
   const nome = req.body.nome;
@@ -319,3 +331,6 @@ app.get('/pesquisar', (req, res) => {
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
 });
+
+
+

@@ -17,12 +17,22 @@
         </div>
         <ul>
             <li><a href="/">Início</a></li>
-            <li><a href="/cadastro">Loja</a></li>
-            <li><a href="/cadastro">Entre em Contato</a></li>
+            <% if (nomeUsuario) { %>
+                <li><a href="/loja">Loja</a></li>
+                <li><a href="/contato">Entre em Contato</a></li>
+            <% } else { %>
+                <li><a href="/cadastro">Loja</a></li>
+                <li><a href="/cadastro">Entre em Contato</a></li>
+            <% } %>
         </ul>
         <div class="icons">
-            <a href="/cadastro"><i class="fas fa-shopping-cart"></i></a>
-            <a href="/cadastro"><i class="far fa-heart"></i></a>
+            <% if (nomeUsuario) { %>
+                <a href="/carrinho"><i class="fas fa-shopping-cart"></i></a>
+                <a href="/favoritos"><i class="far fa-heart"></i></a>
+            <% } else { %>
+                <a href="/cadastro"><i class="fas fa-shopping-cart"></i></a>
+                <a href="/cadastro"><i class="far fa-heart"></i></a>
+            <% } %>
         </div>
 
         <div class="user-actions">
