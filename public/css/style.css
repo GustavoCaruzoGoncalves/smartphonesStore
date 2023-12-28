@@ -153,7 +153,7 @@ body {
     padding: 10px;
     background-color: #f9f9f9;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    flex: 1 1 40%; /* Distribui igualmente o espaço em telas maiores */
+    flex: 1 1 5%; /* Distribui igualmente o espaço em telas maiores */
     box-sizing: border-box; /* Adiciona a propriedade para garantir que padding e border não alterem o tamanho total */
 }
 
@@ -249,4 +249,19 @@ body {
     }
 
     /* Adicione mais estilos conforme necessário para outros elementos */
+}
+
+
+.btn-comprar {
+    display: inline-block; /* Garante que o botão não ocupe toda a largura */
+    padding: 8px 16px;
+    background-color: #ff0202;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-comprar:hover {
+    background-color: #d34646;
 }

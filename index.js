@@ -333,4 +333,27 @@ app.listen(port, () => {
 });
 
 
+app.get('/comprar/:id', (req, res) => {
+  const produtoId = req.params.id;
 
+  // Lógica para buscar as informações do produto pelo ID
+  const sql = 'SELECT * FROM produtos WHERE id = ?';
+  db.query(sql, [produtoId], (err, results) => {
+    if (err) {
+      console.error('Erro ao buscar informações do produto:', err.stack);
+      res.status(500).send('Erro ao buscar informações do produto');
+      return;
+    }
+
+    if (results.length === 0) {
+      // Produto não encontrado
+      res.status(404).send('Produto não encontrado');
+      return;
+    }
+
+    const produto = results[0];
+
+    // Renderiza a página de detalhes do produto com as informações do produto
+    res.render('detalhes-produto', { produto });
+  });
+});

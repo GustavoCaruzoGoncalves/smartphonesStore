@@ -81,23 +81,22 @@
     <!-- ... (código anterior) ... -->
 
     <div class="card-container">
-        <% produtos.forEach(produto=> { %>
-            <div class="card">
-                <% if (produto) { %>
-                    <img src="<%= produto.imagem ? produto.imagem : '/uploads/placeholder.jpg' %>"
-                        alt="<%= produto.nome %>">
-                    <h3>
-                        <%= produto.nome %>
-                    </h3>
-                    <p>
-                        <%= produto.descricao %>
-                    </p>
-                    <p>Preço: R$ <%= produto.preco.toFixed(2) %>
-                    </p>
-                    <% } %>
-            </div>
-            <% }); %>
-    </div>
+        <% produtos.forEach(produto => { %>
+          <div class="card">
+            <% if (produto) { %>
+              <img src="<%= produto.imagem ? produto.imagem : '/uploads/placeholder.jpg' %>"
+                alt="<%= produto.nome %>">
+              <h3><%= produto.nome %></h3>
+              <p><%= produto.descricao %></p>
+              <p>Preço: R$ <%= produto.preco.toFixed(2) %></p>
+              <a href="/comprar/<%= produto.id %>" class="btn-comprar">Comprar</a>
+            <% } %>
+          </div>
+        <% }); %>
+      </div>
+
+
+
     <script src="/js/home.js"></script>
 </body>
 
