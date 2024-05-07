@@ -32,7 +32,7 @@ body h2{
 }
 
 .navbar ul li {
-    padding: 10px 20px;
+    padding: 10px 10px;
 }
 
 .navbar ul li a {
@@ -121,7 +121,7 @@ body h2{
     color: #fff;
     text-decoration: none;
     border-radius: 10px;
-    margin-left: 10px;
+    margin-left: 1px;
     display: inline-block; /* Adiciona a propriedade display: inline-block; */
 }
 
@@ -207,8 +207,9 @@ body h2{
 }
 
 .card img {
-    max-width: 100%;
-    height: auto;
+    width: 100%; /* Definir a largura para preencher o contêiner */
+    height: 200px; /* Definir uma altura fixa para as imagens */
+    object-fit: cover; /* Garantir que a imagem cubra completamente o contêiner */
     border-radius: 10px;
     margin-bottom: 10px;
 }
@@ -233,7 +234,6 @@ body h2{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between; /* Distribui os cards igualmente em cada linha */
-}
 }
 
 
@@ -352,6 +352,12 @@ body h2{
     text-decoration: none;
     border-radius: 10px;
     transition: background-color 0.3s ease;
+    margin-right: 10px; /* Adiciona margem à direita para distanciar do ícone do carrinho */
+}
+
+.cart-icon {
+    margin-left: 30px; /* Adiciona margem à esquerda para distanciar do botão "Comprar" */
+    color: #000000;
 }
 
 .btn-comprar:hover {

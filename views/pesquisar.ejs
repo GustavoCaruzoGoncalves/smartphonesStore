@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
-
 <body>
     <nav class="navbar">
         <div class="logo">
@@ -57,9 +56,9 @@
                 <button type="submit">Buscar</button>
             </form>
         </div>
-    </nav>
+    </nav> <br><br><br><br><br>
 
-    <div class="result-container">
+   <center> <div class="result-container">
         <% produtos.forEach(produto => { %>
             <div class="card">
                 <% if (produto) { %>
@@ -72,6 +71,7 @@
             </div>
         <% }); %>
     </div>
+    </center>
 
 </body>
 

@@ -8,6 +8,11 @@
     <title>RodriguesPhone</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        footer{
+            color: #fff;
+        }
+    </style>
 </head>
 
 <body>
@@ -132,11 +137,20 @@
                         <p><%= produto.descricao %></p>
                         <p>Preço: R$ <%= produto.preco.toFixed(2) %></p>
                         <a href="/comprar/<%= produto.id %>" class="btn-comprar">Comprar</a>
+                        <a href="" class="fas fa-shopping-cart cart-icon"></a>
+                        
                     <% } %>
                 </div>
             <% }); %>
         </div>
-    </div>
+    </div><hr><br><br>
+
+    <center> <div class="footer">
+                 <footer>
+                  <p>Site básico para o RodriguesPhone, desenvolvido por Pedro e Gustavo</p>
+                 </footer>
+             </div>
+    </center>
 
     <script src="/js/home.js"></script>
 </body>

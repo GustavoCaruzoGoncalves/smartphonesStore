@@ -229,9 +229,6 @@ app.get('/celulares', (req, res) => {
   });
 });
 
-
-
-
 app.get('/contato', (req, res) => {
   res.render('contato'); // Renderiza a página 'contato.ejs'
 });
@@ -406,7 +403,12 @@ app.get('/comprar/:id', (req, res) => {
 
     const produto = results[0];
 
-    // Renderiza a página de detalhes do produto com as informações do produto
-    res.render('detalhes-produto', { produto });
+    // Passa nomeUsuario para o template
+    const nomeUsuario = req.session.nomeUsuario || '';
+    const tipo = req.session.tipo || 0; // Defina um valor padrão para tipo, caso não esteja definido
+
+    // Renderiza a página de detalhes do produto com as informações do produto e nomeUsuario
+    res.render('detalhes-produto', { produto, nomeUsuario, tipo });
   });
 });
+

@@ -1,28 +1,97 @@
-<!-- detalhes-produto.ejs -->
-
+<!-- views/index.ejs -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RodriguesPhone</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        h2{
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        p{
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        btn-comprar{
+            
+        }
+        footer{
+            color: #fff;
+        }
+    </style>
 </head>
 
 <body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="img/logoloja.jpg" alt="Logo da Loja">
+        </div>
+        <ul>
+            <li><a href="/">Início</a></li>
+            <% if (nomeUsuario) { %>
+                <li><a href="/loja">Loja</a></li>
+                <li><a href="/contato">Entre em Contato</a></li>
+            <% } else { %>
+                <li><a href="/cadastro">Loja</a></li>
+                <li><a href="/cadastro">Entre em Contato</a></li>
+            <% } %>
+        </ul>
+
+        <div class="user-actions">
+            <% if (nomeUsuario) { %>
+                <!-- Verifique se o usuário é um administrador -->
+                <% if (tipo===1) { %>
+                    <!-- Se for um administrador, exiba opções específicas -->
+                    <div class="dropdown">
+                        <button class="dropbtn">Bem-vindo, <%= nomeUsuario %>!</button>
+                        <div class="dropdown-content">
+                            <a href="/produtos">Produtos Cadastrados</a>
+                            <a href="/paineladmin">Página de Administrador</a>
+                            <a href="/logout">Sair</a>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <!-- Se for um usuário comum, exiba opções padrão -->
+                    <div class="dropdown">
+                        <button class="dropbtn">Bem-vindo, <%= nomeUsuario %>!</button>
+                        <div class="dropdown-content">
+                            <a href="/carrinho">Carrinho</a>
+                            <a href="/loja">Loja</a>
+                            <a href="/logout">Sair</a>
+                        </div>
+                    </div>
+                <% } %>
+            <% } else { %>
+                <a href="/cadastro" class="btn-cadastro">Cadastre-se ou faça login</a>
+            <% } %>
+        </div>
+    </nav> <br><br><br><br><br>
     
 
+    <div class="produto">
 
-    <!-- Seus detalhes específicos do produto podem ser exibidos aqui -->
-    <h2><%= produto.nome %></h2>
-    <img src="<%= produto.imagem %>" alt="<%= produto.nome %>">
-    <p><%= produto.descricao %></p>
-    <p>Preço: R$ <%= produto.preco.toFixed(2) %></p>
-    <!-- Adicione mais detalhes conforme necessário -->
+        <center>
+        
+        <!-- Seus detalhes específicos do produto podem ser exibidos aqui -->
+        <h2><%= produto.nome %></h2>
+        <img src="<%= produto.imagem %>" alt="<%= produto.nome %>">
+        <p><%= produto.descricao %></p>
+        <p>Preço: R$ <%= produto.preco.toFixed(2) %></p>
+        <a href="/comprar/<%= produto.id %>" class="btn-comprar">Comprar</a>
+        <!-- Adicione mais detalhes conforme necessário -->
+    </center>
+    </div> <hr><br><br>
 
-    <!-- Seus botões ou links adicionais podem ser incluídos aqui -->
+          <center> <div class="footer">
+                        <footer>
+                             <p>Site básico para o RodriguesPhone, desenvolvido por Pedro e Gustavo</p>
+                         </footer>
+                    </div>
+         </center>
 </body>
 
 </html>
