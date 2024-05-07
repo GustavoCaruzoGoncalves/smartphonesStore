@@ -1,0 +1,144 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RodriguesPhone</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="img/logoloja.jpg" alt="Logo da Loja">
+        </div>
+        <ul>
+            <li><a href="/">Início</a></li>
+            <% if (nomeUsuario) { %>
+                <li><a href="/loja">Loja</a></li>
+                <li><a href="/contato">Entre em Contato</a></li>
+            <% } else { %>
+                <li><a href="/cadastro">Loja</a></li>
+                <li><a href="/cadastro">Entre em Contato</a></li>
+            <% } %>
+        </ul>
+        <div class="icons">
+            <% if (nomeUsuario) { %>
+                <a href="/carrinho"><i class="fas fa-shopping-cart"></i></a>
+                <a href="/favoritos"><i class="far fa-heart"></i></a>
+            <% } else { %>
+                <a href="/cadastro"><i class="fas fa-shopping-cart"></i></a>
+                <a href="/cadastro"><i class="far fa-heart"></i></a>
+            <% } %>
+        </div>
+
+        <div class="user-actions">
+            <% if (nomeUsuario) { %>
+                <!-- Verifique se o usuário é um administrador -->
+                <% if (tipo===1) { %>
+                    <!-- Se for um administrador, exiba opções específicas -->
+                    <div class="dropdown">
+                        <button class="dropbtn">Bem-vindo, <%= nomeUsuario %>!</button>
+                        <div class="dropdown-content">
+                            <a href="/produtos">Produtos Cadastrados</a>
+                            <a href="/paineladmin">Página de Administrador</a>
+                            <a href="/logout">Sair</a>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <!-- Se for um usuário comum, exiba opções padrão -->
+                    <div class="dropdown">
+                        <button class="dropbtn">Bem-vindo, <%= nomeUsuario %>!</button>
+                        <div class="dropdown-content">
+                            <a href="/carrinho">Carrinho</a>
+                            <a href="/loja">Loja</a>
+                            <a href="/logout">Sair</a>
+                        </div>
+                    </div>
+                <% } %>
+            <% } else { %>
+                <a href="/cadastro" class="btn-cadastro">Cadastre-se ou faça login</a>
+            <% } %>
+        </div>
+
+        <div class="theme-switch">
+            <a href="#" id="theme-toggle" onclick="toggleTheme()" class="btn-themetoggle">Mudar tema</a>
+        </div>
+
+        <div class="search">
+            <form action="/pesquisar" method="GET">
+                <!-- Alteração: Adiciona o formulário e define a rota de pesquisa -->
+                <input type="text" placeholder="Pesquisar" name="q"> <!-- Alteração: Adiciona o atributo 'name' -->
+                <button type="submit">Buscar</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Barra lateral para filtros -->
+        <div class="sidebar">
+            <h2>Filtrar por:</h2>
+            <!-- Formulário para filtragem -->
+            <form action="/filtrar" method="GET">
+                <label for="preco">Preço:</label>
+                <input type="number" name="precoMin" placeholder="Mínimo">
+                <input type="number" name="precoMax" placeholder="Máximo"><br>
+
+                <label for="modelo">Modelo:</label>
+                <select name="modelo">
+                    <option value="">Selecione</option>
+                    <option value="iPhone 8">iPhone 8</option>
+                    <option value="iPhone XR">iPhone XR</option>
+                    <option value="iPhone 11">iPhone 11</option>
+                    <option value="iPhone 12">iPhone 12</option>
+                    <option value="iPhone 13">iPhone 13</option>
+                    <option value="iPhone 14">iPhone 14</option>
+                    <option value="iPhone 15">iPhone 15</option>
+                    <option value="iPhone 14 Pro">iPhone 14 Pro</option>
+                    <option value="iPhone 15 Pro Max">iPhone 15 Pro Max
+                </select><br>
+
+                <label for="cor">Cor:</label>
+                <select name="cor">
+                    <option value="">Selecione</option>
+                    <option value="Preto">Preto</option>
+                    <option value="Branco">Branco</option>
+                    <option value="Outros">Outros</option>
+                </select><br>
+
+                <label for="armazenamento">Armazenamento:</label>
+                <select name="armazenamento">
+                    <option value="">Selecione</option>
+                    <option value>128GB</option>
+                    <option value>256GB</option>
+                </select><br>
+
+                <button type="submit">Filtrar</button>
+            </form>
+        </div>
+
+        <!-- Container dos cards -->
+        <div class="card-container">
+            <!-- Loop para exibir os cards -->
+            <% produtos.forEach(produto => { %>
+                <div class="card">
+                    <% if (produto) { %>
+                        <img src="<%= produto.imagem ? produto.imagem : '/uploads/placeholder.jpg' %>"
+                            alt="<%= produto.nome %>">
+                        <h3><%= produto.nome %></h3>
+                        <p><%= produto.descricao %></p>
+                        <p>Preço: R$ <%= produto.preco.toFixed(2) %></p>
+                        <a href="/comprar/<%= produto.id %>" class="btn-comprar">Comprar</a>
+                    <% } %>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+
+    <script src="/js/home.js"></script>
+</body>
+
+</html>

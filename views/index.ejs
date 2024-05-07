@@ -18,7 +18,7 @@
         <ul>
             <li><a href="/">Início</a></li>
             <% if (nomeUsuario) { %>
-                <li><a href="/loja">Loja</a></li>
+                <li><a href="/celulares">Loja</a></li>
                 <li><a href="/contato">Entre em Contato</a></li>
             <% } else { %>
                 <li><a href="/cadastro">Loja</a></li>
@@ -54,7 +54,7 @@
                             <button class="dropbtn">Bem-vindo, <%= nomeUsuario %>!</button>
                             <div class="dropdown-content">
                                 <a href="/carrinho">Carrinho</a>
-                                <a href="/loja">Loja</a>
+                                <a href="/celulares">Loja</a>
                                 <a href="/logout">Sair</a>
                             </div>
                         </div>
@@ -75,29 +75,27 @@
                 <button type="submit">Buscar</button>
             </form>
         </div>
-    </nav>
-
-    <!-- views/index.ejs -->
-    <!-- ... (código anterior) ... -->
-
-    <div class="card-container">
-        <% produtos.forEach(produto => { %>
-          <div class="card">
-            <% if (produto) { %>
-              <img src="<%= produto.imagem ? produto.imagem : '/uploads/placeholder.jpg' %>"
-                alt="<%= produto.nome %>">
-              <h3><%= produto.nome %></h3>
-              <p><%= produto.descricao %></p>
-              <p>Preço: R$ <%= produto.preco.toFixed(2) %></p>
-              <a href="/comprar/<%= produto.id %>" class="btn-comprar">Comprar</a>
-            <% } %>
-          </div>
-        <% }); %>
-      </div>
+    </nav> <br><br><br><br><br><br><br><br><br><br><br>    <!-- improvisei aqui, ja ta servindo-->
+  
 
 
+        <center><h2>Serviços</h2></center>
+      <div class="rounded-boxes">
+        <a href="/celulares" class="rounded-box">Celulares</a>
+        <a href="/acessorios" class="rounded-box">Acessórios</a>
+        <a href="/smartwatch" class="rounded-box">SmartWatch</a>
+        <a href="/orcamento" class="rounded-box">Faça seu orçamento</a>
+    </div> <hr>
+
+        <center><h2>Entre em contato ou faça seu orçamento!</h2></center>
+        <div class="rounded-boxes">
+        <a href="/contato" class="rounded-box"> Entre em contato</a>
+        <a href="https://www.instagram.com/_rodriguesphone?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="rounded-box" target="_blank">Instagram</a>
+        <a href="/orcamento" class="rounded-box"> Orçamento</a>
+        </div>
+
+    
 
     <script src="/js/home.js"></script>
 </body>
-
 </html>

@@ -2,7 +2,14 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    background-color: #000000;
+    
 }
+
+body h2{
+    color: #fff;
+}
+
 
 .navbar {
     background-color: #000000;
@@ -60,7 +67,7 @@ body {
     border: none;
     cursor: pointer;
     border-radius: 10px;
-    padding: 12px 20px; /* Ajusta o preenchimento interno do botão */
+    padding: 10px 20px; /* Ajusta o preenchimento interno do botão */
     font-size: 16px; /* Ajusta o tamanho da fonte do texto do botão */
     transition: background-color 0.3s ease; /* Adiciona uma transição suave para a mudança de cor de fundo */
 }
@@ -103,7 +110,7 @@ body {
     background-color: #f83e3e;
     color: #fff;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 10px;
     margin-left: 10px;
     display: inline-block; /* Adiciona a propriedade display: inline-block; */
 }
@@ -113,7 +120,7 @@ body {
     background-color: #f83e3e;
     color: #fff;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 10px;
     margin-left: 10px;
     display: inline-block; /* Adiciona a propriedade display: inline-block; */
 }
@@ -126,54 +133,114 @@ body {
     background-color: #ff4c4c;
 }
 
-/*conteudo principal */
 .container {
-    max-width: 500px;
-    margin: 0 auto;
+    max-width: 1000px; /* Ajuste a largura máxima conforme necessário */
+    margin: 90px auto 0; /* Adiciona margem superior para deixar espaço para a barra de navegação */
     padding: 20px;
+    display: flex; /* Torna o conteúdo flexível */
+    align-items: flex-start; /* Alinha os itens ao topo */
+    
 }
 
-.card-section {
-    margin-bottom: 30px;
+.container h2{
+    color: black;
 }
 
-.card-section h2 {
-    font-size: 24px;
+
+/* Estilo para a barra lateral */
+.sidebar {
+    width: 350px; /* Largura da barra lateral */
+    padding:40px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-right: 20px; /* Espaçamento à direita dos cards */
+}
+
+.sidebar h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.sidebar form {
+    margin-bottom: 20px;
+}
+
+.sidebar label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.sidebar input[type="number"],
+.sidebar select {
+    width: 100%;
+    padding: 8px;
     margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
+.sidebar button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff0202;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar button:hover {
+    background-color: #d34646;
 }
 
 .card {
-    width: calc(50% - 20px);
+    width: calc(33.33% - 20px); /* Largura dos cards (33.33% para cada card e 20px de espaço entre os cards) */
     margin: 10px;
     padding: 10px;
     background-color: #f9f9f9;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    flex: 1 1 5%; /* Distribui igualmente o espaço em telas maiores */
-    box-sizing: border-box; /* Adiciona a propriedade para garantir que padding e border não alterem o tamanho total */
+    border-radius: 10px;
+    box-sizing: border-box;
 }
 
 .card img {
-    max-width: 200px;
-    max-width: 200px;
-    object-fit: contain;
-    margin-top: 100px;
-}
-
-.card p {
-    font-size: 14px;
-    color: #666;
-    max-height: 60px; /* Limita o número de linhas para manter a consistência */
-    overflow: hidden;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
 
 .card h3 {
     font-size: 18px;
     margin-bottom: 5px;
+}
+
+.card p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+    line-height: 1.5;
+}
+
+.card p:last-child {
+    margin-bottom: 0;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Distribui os cards igualmente em cada linha */
+}
+}
+
+
+/* Estilo para o hover do card */
+.card:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra mais pronunciada ao passar o mouse */
+    transition: box-shadow 0.3s ease; /* Adiciona uma transição suave */
 }
 
 .dropdown {
@@ -184,8 +251,8 @@ body {
 .dropbtn {
     background-color: #f83e3e;
     color: white;
-    padding: 8px 16px;
-    border-radius: 5px;
+    padding: 10px 16px;
+    border-radius: 10px;
     cursor: pointer;
 }
 
@@ -194,9 +261,9 @@ body {
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .dropdown-content a {
@@ -240,12 +307,37 @@ body {
 }
 
 .dark-theme {
-    background-color: #1a1a1a; /* Cor de fundo do tema escuro */
+    background-color: #fff; /* Cor de fundo do tema escuro */
     color: #ffffff; /* Cor do texto no tema escuro */
 
     .card {
-        background-color: #2c2c2c; /* Cor de fundo dos cards no tema escuro */
+        background-color: #fff; /* Cor de fundo dos cards no tema escuro */
         color: #ffffff; /* Cor do texto nos cards no tema escuro */
+    }
+    .sidebar {
+        background-color: #fff; /* Cor de fundo dos cards no tema escuro */
+        color: #000000; /* Cor do texto nos cards no tema escuro */
+    }
+    .sidebar h2 {
+       
+        color: #000000; /* Cor do texto nos cards no tema escuro */
+    }
+
+    .navbar{
+        background-color: #fff;
+    }
+
+    .navbar ul li a {
+        text-decoration: none;
+        color: #000000;
+    }
+
+    h2{
+        color: #000000;
+    }
+    .icons a {
+        color: #000000;
+        
     }
 
     /* Adicione mais estilos conforme necessário para outros elementos */
@@ -258,10 +350,42 @@ body {
     background-color: #ff0202;
     color: #fff;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 10px;
     transition: background-color 0.3s ease;
 }
 
 .btn-comprar:hover {
     background-color: #d34646;
+}
+
+h2 {
+    color: white;
+}
+
+
+/* CSS */
+.rounded-boxes {
+    display: flex;
+    flex-direction: column; /* Alteração para exibir os itens um abaixo do outro */
+    align-items: center; /* Para centralizar os itens horizontalmente */
+    margin-top: 20px;
+}
+
+.rounded-box {
+    width: 250px;
+    height: 60px;
+    background-color: #d34646;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    margin-bottom: 10px; /* Espaçamento entre as caixas */
+    text-decoration: none; /* Remove a decoração de link */
+    color: #fff; /* Define a cor do texto para preto */
+}
+
+.rounded-box:hover {
+    transform: translateY(-5px);
 }

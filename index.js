@@ -36,22 +36,9 @@ app.use(session({
   saveUninitialized: true
 }));
 
-app.get('/usuarios', (req, res) => {
-  const sql = 'SELECT * FROM usuarios';
 
-  db.query(sql, (err, results) => {
-    if (err) {
-      console.error('Erro ao executar a consulta:', err.stack);
-      res.status(500).send('Erro ao buscar usuários');
-      return;
-    }
 
-    // Renderiza a página EJS com os resultados da consulta
-    res.render('usuarios', { usuarios: results });
-  });
-});
-
-// Adicione o roteamento para index.ejs
+// Rota para exibir a página inicial
 app.get('/', (req, res) => {
   const nomeUsuario = req.session.nomeUsuario;
   const tipo = req.session.tipo;
@@ -82,6 +69,8 @@ app.get('/login', (req, res) => {
 
   res.render('cadastro', { mensagemErro }); // Crie a view login.ejs para exibir o formulário de login
 });
+
+
 
 // Rota para processar o formulário de login
 app.post('/login', (req, res) => {
@@ -151,6 +140,8 @@ app.get('/produtos', (req, res) => {
   }
 });
 
+
+
 app.get('/paineladmin', (req, res) => {
   // Verifique se o usuário é um administrador
   const sqlProdutos = 'SELECT * FROM produtos';
@@ -187,10 +178,73 @@ app.get('/loja', (req, res) => {
   res.render('loja'); 
 });
 
+app.get('/celulares', (req, res) => {
+  const nomeUsuario = req.session.nomeUsuario;
+  const tipo = req.session.tipo || 0; // Defina um valor padrão para tipo, caso não esteja definido
+
+  let sqlProdutos = 'SELECT * FROM produtos WHERE 1 = 1'; // Comece com uma condição verdadeira para simplificar a construção da consulta
+  const params = []; // Array para armazenar os parâmetros de consulta
+
+  const precoMin = req.query.precoMin;
+  const precoMax = req.query.precoMax;
+  const modelo = req.query.modelo;
+  const cor = req.query.cor;
+  const armazenamento = req.query.armazenamento;
+
+  if (precoMin && precoMax) {
+    sqlProdutos += ' AND preco BETWEEN ? AND ?';
+    params.push(precoMin, precoMax);
+  }
+
+  if (modelo) {
+    sqlProdutos += ' AND modelo = ?';
+    params.push(modelo);
+  }
+
+  if (cor) {
+    sqlProdutos += ' AND cor = ?';
+    params.push(cor);
+  }
+
+  if (armazenamento) {
+    sqlProdutos += ' AND armazenamento = ?';
+    params.push(armazenamento);
+  }
+
+  db.query(sqlProdutos, params, (err, resultados) => {
+    if (err) {
+      console.error('Erro ao buscar produtos:', err.stack);
+      res.status(500).send('Erro ao buscar produtos');
+      return;
+    }
+
+    const produtos = resultados.map(produto => {
+      return {
+        ...produto,
+        imagem: produto.imagem ? produto.imagem.toString('base64') : null, // Trata o caso da imagem nula
+      };
+    });
+
+    res.render('celulares', { nomeUsuario, tipo, produtos }); // Passe a variável produtos para a renderização da página celulares.ejs
+  });
+});
+
+
+
+
 app.get('/contato', (req, res) => {
   res.render('contato'); // Renderiza a página 'contato.ejs'
 });
 
+app.post('/filtrar', (req, res) => {
+  const precoMin = req.body.precoMin;
+  const precoMax = req.body.precoMax;
+  const modelo = req.body.modelo;
+  const cor = req.body.cor;
+  const armazenamento = req.body.armazenamento;
+
+  // Aqui você irá construir a consulta SQL com base nos parâmetros de filtragem
+});
 
 
 app.post('/admin/adicionar-produto', upload.single('imagem'), (req, res) => {
@@ -331,7 +385,6 @@ app.get('/pesquisar', (req, res) => {
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
 });
-
 
 app.get('/comprar/:id', (req, res) => {
   const produtoId = req.params.id;
