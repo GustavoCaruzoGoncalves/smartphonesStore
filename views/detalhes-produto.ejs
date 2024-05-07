@@ -7,21 +7,74 @@
     <title>RodriguesPhone</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        h2{
+<style>
+    *{
+        font-family: Arial, Helvetica, sans-serif;
+    }
+        /* Estilo para a barra lateral */
+        .detalhes-sidebar {
+            width: 230px; /* Largura da barra lateral */
+            padding:60px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-right: 20px; /* Espaçamento à direita dos cards */
+        }
+
+        .detalhes-sidebar h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .detalhes-sidebar form {
+            margin-bottom: 20px;
+        }
+
+        .detalhes-sidebar label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .detalhes-sidebar input[type="number"],
+        .detalhes-sidebar select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .detalhes-sidebar button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff0202;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .detalhes-sidebar button:hover {
+            background-color: #d34646;
+        }
+
+        h2 {
             color: #fff;
             font-family: Arial, Helvetica, sans-serif;
         }
-        p{
+
+        p {
             color: #fff;
             font-family: Arial, Helvetica, sans-serif;
         }
-        btn-comprar{
-            
+
+        btn-comprar {
+            /* Adicione seu estilo aqui, se necessário */
         }
-        footer{
-            color: #fff;
-        }
+
+        
     </style>
 </head>
 
@@ -33,7 +86,7 @@
         <ul>
             <li><a href="/">Início</a></li>
             <% if (nomeUsuario) { %>
-                <li><a href="/loja">Loja</a></li>
+                <li><a href="/sobre">Sobre nós</a></li>
                 <li><a href="/contato">Entre em Contato</a></li>
             <% } else { %>
                 <li><a href="/cadastro">Loja</a></li>
@@ -72,26 +125,47 @@
     </nav> <br><br><br><br><br>
     
 
+<div class="container">
+    <!-- Barra lateral para filtros -->
+    <div class="detalhes-sidebar"> <!-- Renomeado para "detalhes-sidebar" -->
+        <h2>Filtrar por:</h2>
+        <!-- Formulário para filtragem -->
+        <form action="/filtrar" method="GET">
+
+            <label for="capacidade">Capacidade:</label>
+            <select name="capacidade">
+                <option value="">Selecione</option>
+                <option value="128gb">128GB</option>
+                <option value="256gb ">256GB</option>
+              
+            </select><br>
+
+            <label for="cor">Cor:</label>
+            <select name="cor">
+                <option value="">Selecione</option>
+                <option value="branco">Branco</option>
+                <option value="preto ">Preto</option>
+                <option value="rosa">Rosa</option>
+            </select><br>
+
+            <button type="submit">Verificar disponibilidade</button>
+        </form>
+    </div>
+
     <div class="produto">
-
         <center>
-        
-        <!-- Seus detalhes específicos do produto podem ser exibidos aqui -->
-        <h2><%= produto.nome %></h2>
-        <img src="<%= produto.imagem %>" alt="<%= produto.nome %>">
-        <p><%= produto.descricao %></p>
-        <p>Preço: R$ <%= produto.preco.toFixed(2) %></p>
-        <a href="/comprar/<%= produto.id %>" class="btn-comprar">Comprar</a>
-        <!-- Adicione mais detalhes conforme necessário -->
-    </center>
-    </div> <hr><br><br>
+            <!-- Seus detalhes específicos do produto podem ser exibidos aqui -->
+            <h2><%= produto.nome %></h2>
+            <img src="<%= produto.imagem %>" alt="<%= produto.nome %>" style="max-width: 450; height: 300px;">
+            <p><%= produto.descricao %></p>
+            <p>Preço: R$ <%= produto.preco.toFixed(2) %></p>
+            <a href="/comprar/<%= produto.id %>" class="btn-comprar">Comprar</a>
+            <!-- Adicione mais detalhes conforme necessário -->
+        </center>
+    </div> 
+</div>
 
-          <center> <div class="footer">
-                        <footer>
-                             <p>Site básico para o RodriguesPhone, desenvolvido por Pedro e Gustavo</p>
-                         </footer>
-                    </div>
-         </center>
+        
 </body>
 
 </html>

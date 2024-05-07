@@ -229,6 +229,57 @@ app.get('/celulares', (req, res) => {
   });
 });
 
+app.get('/acessorios', (req, res) => {
+  const nomeUsuario = req.session.nomeUsuario;
+  const tipo = req.session.tipo || 0; // Defina um valor padrão para tipo, caso não esteja definido
+
+  let sqlProdutos = 'SELECT * FROM produtos WHERE 1 = 1'; // Comece com uma condição verdadeira para simplificar a construção da consulta
+  const params = []; // Array para armazenar os parâmetros de consulta
+
+  const precoMin = req.query.precoMin;
+  const precoMax = req.query.precoMax;
+  const modelo = req.query.modelo;
+  const cor = req.query.cor;
+  const armazenamento = req.query.armazenamento;
+
+  if (precoMin && precoMax) {
+    sqlProdutos += ' AND preco BETWEEN ? AND ?';
+    params.push(precoMin, precoMax);
+  }
+
+  if (modelo) {
+    sqlProdutos += ' AND modelo = ?';
+    params.push(modelo);
+  }
+
+  if (cor) {
+    sqlProdutos += ' AND cor = ?';
+    params.push(cor);
+  }
+
+  if (armazenamento) {
+    sqlProdutos += ' AND armazenamento = ?';
+    params.push(armazenamento);
+  }
+
+  db.query(sqlProdutos, params, (err, resultados) => {
+    if (err) {
+      console.error('Erro ao buscar produtos:', err.stack);
+      res.status(500).send('Erro ao buscar produtos');
+      return;
+    }
+
+    const produtos = resultados.map(produto => {
+      return {
+        ...produto,
+        imagem: produto.imagem ? produto.imagem.toString('base64') : null, // Trata o caso da imagem nula
+      };
+    });
+
+    res.render('acessorios', { nomeUsuario, tipo, produtos }); // Passe a variável produtos para a renderização da página acessorios.ejs
+  });
+});
+
 app.get('/contato', (req, res) => {
   res.render('contato'); // Renderiza a página 'contato.ejs'
 });
